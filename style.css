@@ -1,0 +1,25 @@
+* {
+    font-family: Arial, Helvetica;
+    /* text-align: justify; */
+    letter-spacing: .5rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    
+}
+
+body{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: row;
+height: 100vh;
+}
+
+table {
+ max-width: 18rem; 
+}
+
+.highlight {
+    
+}
+
