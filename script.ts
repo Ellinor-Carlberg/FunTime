@@ -47,6 +47,7 @@ function loadPage() {
         let character = words[0].charAt(i)
         console.log(character)
         eachCell[startNumber + i].innerText = character
+        eachCell[startNumber + i].classList.add("highlight")
     }
 
 }
