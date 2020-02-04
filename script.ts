@@ -18,7 +18,7 @@ function loadPage() {
             const letter = alphabets[lettersIndex]
             row.push(letter)
         }
-        
+
 
         // // while ((words.shift()) !== undefined) {
         // if (words.length > 0) {
@@ -47,6 +47,17 @@ function loadPage() {
     })
     console.log(table)
 
-    
+    const allRows = document.querySelectorAll('tr')
+    const eachCell = allRows[0].childNodes as any
+    const numOfChildDeleted = words[0].length
+    console.log(numOfChildDeleted)
+
+    console.log(eachCell[0])
+    eachCell[1].innerText = '1'
+    eachCell[2].innerText = '5'
+    eachCell[3].innerText = '6'
+    // eachCell[2]
+    // eachCell[3]
+
 }
 
