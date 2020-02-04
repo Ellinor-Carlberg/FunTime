@@ -18,20 +18,6 @@ function loadPage() {
             const letter = alphabets[lettersIndex]
             row.push(letter)
         }
-
-
-        // // while ((words.shift()) !== undefined) {
-        // if (words.length > 0) {
-        //     const word = words.shift()
-        //     const offset = Math.floor((1 + cols - words.length))
-
-        //     for (let i = 0; i < word.length; i++) {
-        //         if (1 + offset < cols) {
-        //             row[i + offset] = word[i]
-        //         }
-        //     }
-        // }
-        // // }
         data.push(row)
     }
 
@@ -49,15 +35,19 @@ function loadPage() {
 
     const allRows = document.querySelectorAll('tr')
     const eachCell = allRows[0].childNodes as any
-    const numOfChildDeleted = words[0].length
-    console.log(numOfChildDeleted)
+    const wordLength = words[0].length
+    console.log(wordLength)
 
     console.log(eachCell[0])
-    eachCell[1].innerText = '1'
-    eachCell[2].innerText = '5'
-    eachCell[3].innerText = '6'
-    // eachCell[2]
-    // eachCell[3]
+
+    const startNumber = Math.floor(Math.random() * (cols - wordLength))
+
+    console.log(words[0])
+    for (let i = 0; i < wordLength; i++) {
+        let character = words[0].charAt(i)
+        console.log(character)
+        eachCell[startNumber + i].innerText = character
+    }
 
 }
 
