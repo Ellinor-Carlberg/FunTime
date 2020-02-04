@@ -18,19 +18,20 @@ function loadPage() {
             const letter = alphabets[lettersIndex]
             row.push(letter)
         }
+        
 
-        // while ((words.shift()) !== undefined) {
-        if (words.length > 0) {
-            const word = words.shift()
-            const offset = Math.floor((1 + cols - words.length))
+        // // while ((words.shift()) !== undefined) {
+        // if (words.length > 0) {
+        //     const word = words.shift()
+        //     const offset = Math.floor((1 + cols - words.length))
 
-            for (let i = 0; i < word.length; i++) {
-                if (1 + offset < cols) {
-                    row[i + offset] = word[i]
-                }
-            }
-        }
+        //     for (let i = 0; i < word.length; i++) {
+        //         if (1 + offset < cols) {
+        //             row[i + offset] = word[i]
+        //         }
+        //     }
         // }
+        // // }
         data.push(row)
     }
 
@@ -45,5 +46,7 @@ function loadPage() {
         })
     })
     console.log(table)
+
+    
 }
 
