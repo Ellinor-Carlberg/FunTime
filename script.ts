@@ -125,8 +125,7 @@ function convertNumberToName(num) {
         "ten", "eleven", "twelve", "thirteen", "fourteen",
         "fifteen", "sixteen", "seventeen",
         "eighteen", "nineteen"]
-    const tensNames = ["twenty", "thirty", "forty", "fifty",
-        "sixty", "seventy", "eighty", "ninety"]
+    const tensNames = ["twenty", "thirty", "forty", "fifty"]
     let tens, ones, result
     if (num < lowNames.length) {
         result = lowNames[num]
@@ -139,7 +138,7 @@ function convertNumberToName(num) {
                 result += "-" + lowNames[ones]
             }
         } else {
-            result = "notime"
+            result = "infinite"
         }
     }
     console.log(result)
