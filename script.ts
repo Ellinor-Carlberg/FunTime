@@ -5,13 +5,13 @@ class Time {
     morning = true
 
     getTimeOfDay(): boolean {
-        if (this.hours > 12) {
+        if (this.hours >= 12) {
             this.morning = false
         }
         return this.morning
     }
     getHours(): number {
-        if (this.hours > 12) {
+        if (this.hours >= 12) {
             this.hours = (this.hours - 12)
         }
         else {
@@ -20,25 +20,24 @@ class Time {
         return this.hours
     }
     getMinutes(): number {
-        console.log(this.minutes)
         return this.minutes
     }
 }
 
-/**get.Seconds och if seconds är 00 kör loadpage igen??? (drawtext och drawTable)*/
-let TimerHandler: any 
-window.setInterval("timer", setInterval(TimerHandler))
-
 window.addEventListener("load", loadPage)
 
-function loadPage() { setInterval(() => {
+function loadPage() {
     const rows: number = 11
     const cols: number = 11
     drawTable(rows, cols)
     drawText(cols)
+    setInterval(function () {
+        drawTable(rows, cols)
+    drawText(cols)
+    }, 1000);
     
     
-}, 1000);}
+}
 
 function drawTable(rows: number, cols: number) {
     const alphabets: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -103,8 +102,8 @@ function drawTimeText(time: Time, rowNumber: number, cols: number, allRows: Node
 }
 
 function drawHours(time: Time, rowNumber: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
-    const hoursText: string[] = ['twelve', 'one', 'two', 'three', 'four', 'five', 'six',
-        'seven', 'eight', 'nine', 'ten', 'eleven']
+    const hoursText: string[] = ['twelve','one', 'two', 'three', 'four', 'five', 'six',
+        'seven', 'eight', 'nine', 'ten', 'eleven','twelve']
     let minutesNum = time.getMinutes()
     let hours
     if (minutesNum <= 30) {
