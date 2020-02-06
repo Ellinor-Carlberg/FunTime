@@ -1,22 +1,17 @@
-// enum Page {
-//     TextClock,
-//     RotateClock
-// }
-
 class Time {
     newDate = new Date()
     hours = this.newDate.getHours()
     minutes = this.newDate.getMinutes()
     morning = true
 
-    getTimeOfDay() {
+    getTimeOfDay(): boolean {
         if (this.hours > 12) {
             this.morning = false
         }
         return this.morning
     }
-    getHours() {
-        if (this.hours > 12 && this.minutes > 30) {
+    getHours(): number {
+        if (this.hours > 12) {
             this.hours = (this.hours - 12)
         }
         else {
@@ -24,11 +19,10 @@ class Time {
         }
         return this.hours
     }
-    getMinutes() {
+    getMinutes(): number {
         console.log(this.minutes)
         return this.minutes
     }
-
 }
 
 window.addEventListener("load", loadPage)
@@ -38,12 +32,15 @@ function loadPage() {
     const cols: number = 11
     drawTable(rows, cols)
     drawText(cols)
+    setInterval(function () {
+       drawTable(rows, cols)
+        drawText(cols)
+    }, 20000);
 }
 
 function drawTable(rows: number, cols: number) {
     const alphabets: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const data = []
-
     for (let i = 0; i <= rows; i++) {
         const row = []
         for (let j = 0; j <= cols; j++) {
@@ -67,19 +64,14 @@ function drawTable(rows: number, cols: number) {
 
 function drawText(cols: number) {
     const words: string[] = ['the', 'time', 'is']
-    // const minutesText: string[] = ['five', 'ten','quarter', 'twenty', 'twenty-five','half']
-    // const minutesTo: string[] = [ 'past', 'to']
+
     let time = new Time()
     const allRows = document.querySelectorAll('tr')
 
     drawRelevantArray(words, 0, cols, allRows)
-    drawTimeText(11, cols, allRows)
-    drawHours(time, 5, cols, allRows)
-    drawMinutes(time,8,cols,allRows)
-    convertNumberToName(time.getMinutes())
-    //drawMinutesText(minutesText, 4, cols, allRows)
-    // drawRelevantArray(words, 0, cols)
-    // drawRelevantArray(words, 0, cols)
+    drawTimeText(time, 11, cols, allRows)
+    drawTime(time, 5, 7, cols, allRows)
+    drawHours(time, 9, cols, allRows)
 }
 
 function drawRelevantArray(array: string[], rowNumber: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
@@ -95,9 +87,8 @@ function drawRelevantArray(array: string[], rowNumber: number, cols: number, all
     }
 }
 
-function drawTimeText(rowNumber, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
-    let time = new Time()
-    let timeOfDay
+function drawTimeText(time: Time, rowNumber: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
+    let timeOfDay: string
     if (time.getTimeOfDay()) {
         timeOfDay = 'AM'
     }
@@ -108,45 +99,48 @@ function drawTimeText(rowNumber, cols: number, allRows: NodeListOf<HTMLTableRowE
     placeRandomly(cols, timeOfDay, eachCell)
 }
 
-function drawHours(time, rowNumber, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
-    let hours = convertNumberToName(time.getHours())
+function drawHours(time: Time, rowNumber: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
+    const hoursText: string[] = ['twelve', 'one', 'two', 'three', 'four', 'five', 'six',
+        'seven', 'eight', 'nine', 'ten', 'eleven']
+    let minutesNum = time.getMinutes()
+    let hours
+    if (minutesNum <= 30) {
+        hours = hoursText[time.getHours()]
+    }
+    else {
+        hours = hoursText[time.getHours() + 1]
+    }
+
     let eachCell = allRows[rowNumber].childNodes as NodeListOf<HTMLTableDataCellElement>
     placeRandomly(cols, hours, eachCell)
 }
-function drawMinutes(time, rowNumber, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
-    let minutes = convertNumberToName(time.getMinutes())
-    let eachCell = allRows[rowNumber].childNodes as NodeListOf<HTMLTableDataCellElement>
+
+function drawTime(time: Time, minutesRow: number, directionRow: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
+
+    let minutesNum = time.getMinutes()
+    const minutesText: string[] = ['five', 'ten', 'quarter', 'twenty', 'twenty-five', 'half']
+
+    let eachCell = allRows[minutesRow].childNodes as NodeListOf<HTMLTableDataCellElement>
+    let eachCellRow2 = allRows[directionRow].childNodes as NodeListOf<HTMLTableDataCellElement>
+    let minutes: string
+
+
+    if (minutesNum == 0) {
+        minutes = ''
+        placeRandomly(cols, '', eachCellRow2)
+    }
+    else if (minutesNum > 0 && minutesNum <= 30) {
+        minutes = minutesText[Math.floor(minutesNum / 5) - 1]
+        placeRandomly(cols, 'past', eachCellRow2)
+    }
+    else {
+        minutes = minutesText[minutesText.length - Math.floor((minutesNum - 30) / 5) - 1]
+        placeRandomly(cols, 'to', eachCellRow2)
+    }
     placeRandomly(cols, minutes, eachCell)
 }
 
-function convertNumberToName(num) {
-    const lowNames = ["zero", "one", "two", "three",
-        "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen",
-        "fifteen", "sixteen", "seventeen",
-        "eighteen", "nineteen"]
-    const tensNames = ["twenty", "thirty", "forty", "fifty"]
-    let tens, ones, result
-    if (num < lowNames.length) {
-        result = lowNames[num]
-    } else {
-        tens = Math.floor(num / 10)
-        ones = num % 10
-        if (tens <= 9) {
-            result = tensNames[tens - 2]
-            if (ones > 0) {
-                result += "-" + lowNames[ones]
-            }
-        } else {
-            result = "infinite"
-        }
-    }
-    console.log(result)
-    return result
-}
-
-
-function placeRandomly(cols, item, eachCell) {
+function placeRandomly(cols, item: string, eachCell) {
     const startNumber = Math.floor(Math.random() * (cols - item.length))
     for (let i = 0; i < item.length; i++) {
         let character = item.charAt(i)
