@@ -20,6 +20,8 @@ table {
 }
 
 .highlight {
-    
+    text-transform: uppercase;
+    color: green;
+    font-weight: bold;
 }
 
