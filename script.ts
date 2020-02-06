@@ -31,14 +31,20 @@ class Time {
 
 }
 
+/**get.Seconds och if seconds är 00 kör loadpage igen??? (drawtext och drawTable)*/
+let TimerHandler: any 
+window.setInterval("timer", setInterval(TimerHandler))
+
 window.addEventListener("load", loadPage)
 
-function loadPage() {
+function loadPage() { setInterval(() => {
     const rows: number = 11
     const cols: number = 11
     drawTable(rows, cols)
     drawText(cols)
-}
+    
+    
+}, 1000);}
 
 function drawTable(rows: number, cols: number) {
     const alphabets: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -81,6 +87,7 @@ function drawText(cols: number) {
     // drawRelevantArray(words, 0, cols)
     // drawRelevantArray(words, 0, cols)
 }
+
 
 function drawRelevantArray(array: string[], rowNumber: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
     for (const item of array) {

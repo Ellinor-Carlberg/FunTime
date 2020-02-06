@@ -1,9 +1,11 @@
 * {
-    font-family: Arial, Helvetica;
     /* text-align: justify; */
+    font-family: Arial, Helvetica;
     letter-spacing: .5rem;
     font-size: 1rem;
     line-height: 2rem;
+    margin: 0;
+    padding: 0;
     
 }
 
@@ -18,14 +20,13 @@ background-color: darkred;
 }
 
 table {
- max-width: 18rem; 
+ max-width: 19rem;
+ padding: 0 0 0 0.5rem;
 }
 
 .highlight {
- 
     color: lightpink;
     font-weight: bolder;
     text-transform: uppercase;
-
 }
 
