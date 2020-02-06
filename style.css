@@ -13,6 +13,8 @@ justify-content: center;
 align-items: center;
 flex-direction: row;
 height: 100vh;
+color: rgb(43, 43, 43);
+background-color: darkred;
 }
 
 table {
@@ -20,8 +22,10 @@ table {
 }
 
 .highlight {
+ 
+    color: lightpink;
+    font-weight: bolder;
     text-transform: uppercase;
-    color: green;
-    font-weight: bold;
+>>>>>>> a0f392dc715ae52c6776b909321d78e34128ea03
 }
 
