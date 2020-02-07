@@ -32,3 +32,23 @@ table {
     text-transform: uppercase;
 }
 
+
+@media screen and (orientation: landscape) {
+    
+    * {
+        letter-spacing: .2rem;
+        font-size: 0.8rem;
+        line-height: 1.6rem;
+        } 
+
+    body {
+        height: 100vh;
+    }
+
+    table {
+        padding: 0 0 0 0.2rem;
+    }
+    
+  } 
+
+
