@@ -33,10 +33,21 @@ function loadPage() {
     drawText(cols)
     setInterval(function () {
         drawTable(rows, cols)
-    drawText(cols)
-    }, 1000);
-    
-    
+        drawText(cols)
+    }, 5000);
+}
+
+document.body.onkeydown = function (e) {
+    if (e.keyCode === 32) {
+        e.preventDefault
+        drawTable(11, 11)
+        const randomText = [['yay', 'it', '', 'is', '', 'party', '', 'time!'],
+        ['', 'Thank', '', 'God', '', 'it`s', '', 'friday!'],
+        ['', 'Time', '', '', '', 'for', '', 'coffee']]
+        let pickRandomText: string[] = randomText[Math.floor(Math.random() * randomText.length)]
+        const allRows = document.querySelectorAll('tr')
+        drawRelevantArray(pickRandomText, 0, 11, allRows)
+    }
 }
 
 function drawTable(rows: number, cols: number) {
@@ -102,8 +113,8 @@ function drawTimeText(time: Time, rowNumber: number, cols: number, allRows: Node
 }
 
 function drawHours(time: Time, rowNumber: number, cols: number, allRows: NodeListOf<HTMLTableRowElement>) {
-    const hoursText: string[] = ['twelve','one', 'two', 'three', 'four', 'five', 'six',
-        'seven', 'eight', 'nine', 'ten', 'eleven','twelve']
+    const hoursText: string[] = ['twelve', 'one', 'two', 'three', 'four', 'five', 'six',
+        'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']
     let minutesNum = time.getMinutes()
     let hours
     if (minutesNum <= 30) {
@@ -142,7 +153,7 @@ function drawTime(time: Time, minutesRow: number, directionRow: number, cols: nu
     placeRandomly(cols, minutes, eachCell)
 }
 
-function placeRandomly(cols, item: string, eachCell) {
+function placeRandomly(cols: number, item: string, eachCell: NodeListOf<HTMLTableDataCellElement>) {
     const startNumber = Math.floor(Math.random() * (cols - item.length))
     for (let i = 0; i < item.length; i++) {
         let character = item.charAt(i)
