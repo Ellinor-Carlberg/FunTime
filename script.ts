@@ -47,7 +47,16 @@ document.body.onkeydown = function (e) {
         let pickRandomText: string[] = randomText[Math.floor(Math.random() * randomText.length)]
         const allRows = document.querySelectorAll('tr')
         drawRelevantArray(pickRandomText, 0, 11, allRows)
+        changeClass()
     }
+}
+
+function changeClass() {
+    let glow = document.querySelectorAll('.highlight')
+    glow.forEach(element => {
+        element.classList.add('glow')
+        element.classList.remove('highlight')
+    })
 }
 
 function drawTable(rows: number, cols: number) {
