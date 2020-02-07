@@ -18,7 +18,9 @@ height: 100vh;
 color: rgb(43, 43, 43);
 background-color: darkred;
 }
-
+.glow{
+    color:yellow
+}
 table {
  max-width: 19rem;
  padding: 0 0 0 0.5rem;
